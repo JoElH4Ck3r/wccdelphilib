@@ -12,7 +12,6 @@ uses Classes, SysUtils, Windows, jpeg,
   Graphics,
   JclDebug,
   SvcMgr,
-  //JCLHack,
   WideStrings,
   Forms
   ;
@@ -77,8 +76,10 @@ procedure CheckDBID(const ID : integer);
 procedure CheckStrID(const strID : string);
 procedure WCCTrace(const Msg : string);
 procedure WCCTraceStrings(sList : TStrings);
-procedure AddStringViaStream(sList : TStrings; s : string); overload;
-//procedure AddStringViaStream(sList : TWideStrings; s : string); overload;
+
+//procedure AddStringViaStream(sList : TStrings; s : string); overload;
+//procedure AddStringViaStream(sList : TWideStrings; s : string);
+
 procedure GetDisplayMetrics(var CX, CY : integer);
 function NormalizePath(const Path : string): string;
 procedure WCCShowWindow(AForm : TForm);
@@ -429,48 +430,48 @@ begin
   Result := VarIsNull(value) or VarIsEmpty(value);
 end;
 
-procedure AddStringViaStream(sList : TStrings; s : string);
-var
-  SS : TStringStream;
-  TempList : TStringList;
-begin
-  if sList = nil then Exit;
-  if Length(Trim(s)) = 0 then Exit;
-  SS := TStringStream.Create(s);
-  try
-    TempList := TStringList.Create;
-    try
-      TempList.LoadFromStream(SS);
-      sList.AddStrings(TempList)
-    finally
-      TempList.Free;
-    end;
-  finally
-    SS.Free;
-  end;
-end;
-(*
-procedure AddStringViaStream(sList : TWideStrings; s : string);
-var
-  SS : TStringStream;
-  TempList : TStringList;
-begin
-  if sList = nil then Exit;
-  if Length(Trim(s)) = 0 then Exit;
-  SS := TStringStream.Create(s);
-  try
-    TempList := TStringList.Create;
-    try
-      TempList.LoadFromStream(SS);
-      sList.AddStrings(TempList)
-    finally
-      TempList.Free;
-    end;
-  finally
-    SS.Free;
-  end;
-end;
-*)
+//procedure AddStringViaStream(sList : TStrings; s : string);
+//var
+//  SS : TStringStream;
+//  TempList : TStringList;
+//begin
+//  if sList = nil then Exit;
+//  if Length(Trim(s)) = 0 then Exit;
+//  SS := TStringStream.Create(s);
+//  try
+//    TempList := TStringList.Create;
+//    try
+//      TempList.LoadFromStream(SS);
+//      sList.AddStrings(TempList)
+//    finally
+//      TempList.Free;
+//    end;
+//  finally
+//    SS.Free;
+//  end;
+//end;
+
+//procedure AddStringViaStream(sList : TWideStrings; s : string);
+//var
+//  SS : TStringStream;
+//  TempList : TStringList;
+//begin
+//  if sList = nil then Exit;
+//  if Length(Trim(s)) = 0 then Exit;
+//  SS := TStringStream.Create(s);
+//  try
+//    TempList := TStringList.Create;
+//    try
+//      TempList.LoadFromStream(SS);
+//      sList.AddStrings(TempList)
+//    finally
+//      TempList.Free;
+//    end;
+//  finally
+//    SS.Free;
+//  end;
+//end;
+
 procedure WCCTrace(const Msg : string);
 begin
   {$IFOPT D+}
